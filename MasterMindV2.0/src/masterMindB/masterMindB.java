@@ -1,7 +1,7 @@
-package masterMid;
+package masterMindB;
 import java.util.Scanner;
 
-public class MasterSimple {
+public class masterMindB {
 	
 	// "functions"
 	static String colorToNumber(String input) {
