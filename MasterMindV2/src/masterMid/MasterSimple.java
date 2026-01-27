@@ -32,7 +32,7 @@ public class MasterSimple {
 		
 	}
 	
-	static String spellingFrustration(int faults) {
+	static String spellingComment(int faults) {
 		String response = "";
 		if (faults == 0) {
 			System.out.println("Check your spelling (one at a time)");	
@@ -168,7 +168,7 @@ public class MasterSimple {
 					inputCode = player.nextLine();
 					outputCode = (colorToNumber(inputCode));
 					if (outputCode .equals("error")) {
-						System.out.println(spellingFrustration(mistakes));	
+						System.out.println(spellingComment(mistakes));	
 						mistakes = (mistakes + 1);
 					}
 					else {
