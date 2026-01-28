@@ -1,79 +1,12 @@
 package masterMindB;
 import java.util.Scanner;
 
+
 public class masterMindB {
-	
-	// "functions"
-	static String colorToNumber(String input) {
-		String output;
-		if (input.equalsIgnoreCase("red") ) {
-			output = "1";
-		}
-		else if (input.equalsIgnoreCase("orange") ) {
-			output = "2";
-		}
-		else if (input.equalsIgnoreCase("yellow") ) {
-			output = "3";
-		}
-		else if (input.equalsIgnoreCase("green") ) {
-			output = "4";
-		}
-		else if (input.equalsIgnoreCase("blue") ) {
-			output = "5";
-		}
-		else if (input.equalsIgnoreCase("purple") ) {
-			output = "6";
-		}
-		else {
-			output = "error";
-		}
-		
-		return output;
-		
-	}
-	
-	static String spellingComment(int faults) {
-		String response = "";
-		if (faults == 0) {
-			System.out.println("Check your spelling (one at a time)");	
-		}
-		else if (faults == 1) {
-			response = ("Please try that again.");	
-		}
-		else if (faults == 2) {
-			response = ("Spelling error, try again.");	
-		}
-		else if (faults == 3) {
-			response = ("Spelling error, try again.");	
-		}
-		else if (faults == 4) {
-			response = ("Spelling error, try again.");	
-		}
-		else if (faults == 5) {
-			response = ("Spelling error, try again.");	
-		}
-		else if (faults == 6) {
-			response = ("Spelling error, try again. (please stop)");	
-		}
-		else if (faults == 7) {
-			response = ("Just try again.");	
-		}
-		else if (faults == 8) {
-			response = ("come on, you should be able to get the spelling right by now.");	
-		}
-		else if (faults == 9) {
-			response = ("spelling.");	
-		}
-		else if (faults > 9) {
-			response = ("Spelling error.   :( ");	
-		}
-		
-		return response;
-		
-	}
 	
 	public static void main(String[] args) {
 		
+		internal internal = new internal();
 		// control codes -- inactive
 		// int blank, white, black;
 		// blank = 0;
@@ -98,7 +31,6 @@ public class masterMindB {
 		int correctionGood = 0;
 		
 		// codes
-		int codePicker;
 		String keyCode;
 		String inputCode;
 		String outputCode;
@@ -112,11 +44,10 @@ public class masterMindB {
 		// modular
 		int repeater;
 		int checker;
-		int printer;
 		int mistakes;
 		int attempts;
 		int games;
-		int codeLength;
+		int codeLength = 0;
 		
 		// other variables
 		String results = "";
@@ -141,14 +72,8 @@ public class masterMindB {
 		// game
 		
 		for (games = 1; games < 10;) {
-			keyCode = "";
-			for (codeLength = 0; codeLength < 4;) {
-				codePicker = (int) (Math.random() * 7);
-				if (keyCode.indexOf(Integer.toString(codePicker)) == -1) {
-					keyCode = keyCode + codePicker;
-					codeLength++;
-				}
-			}
+			
+			keyCode = internal.codeGenerator(codeLength);
 			
 			if (welcome == true) {
 				System.out.println("Game start, good luck "+userName+"!");
@@ -163,12 +88,13 @@ public class masterMindB {
 			constructCode = "";
 			mistakes = 0;
 			
+			
 			for (attempts = 10; attempts > 0;) {	
 				for (repeater = 0; repeater < 4;) {
 					inputCode = player.nextLine();
-					outputCode = (colorToNumber(inputCode));
+					outputCode = (internal.colorToNumber(inputCode));
 					if (outputCode .equals("error")) {
-						System.out.println(spellingComment(mistakes));	
+						System.out.println(internal.spellingComment(mistakes));	
 						mistakes = (mistakes + 1);
 					}
 					else {
@@ -196,23 +122,8 @@ public class masterMindB {
 					winner = true;
 				}
 				
-				for (printer = 0;  printer < 4;) {
-					if (correctionGreat > 0) {
-						results = results + "black,";
-						correctionGreat = correctionGreat - 1;
-					}
-					else if (correctionGood > 0) {
-						results = results + "white,";
-						correctionGood = correctionGood - 1;
-					}
-					else {
-						results = results + "x,";
-					}
-					
-					printer++;
-				}
+				results = internal.feedBackGen(correctionGreat,correctionGood,results);
 				
-				results = results + "-";
 				System.out.println(results);
 				System.out.println(" ");
 				
@@ -247,7 +158,6 @@ public class masterMindB {
 				System.out.println(" ");
 				constructCode = "";
 				results = "";
-				printer = 0;
 				checker = 0;
 				repeater = 0;
 				correctionGreat = 0;
